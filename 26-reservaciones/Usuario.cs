@@ -39,7 +39,7 @@ namespace _26_reservaciones
         /// </summary>
         /// <param name="username">El nombre del usuario</param>
         /// <returns>Los datos del usuario</returns>
-        public Usuario BuscarUsuario(string username, string password)
+        public Usuario BuscarUsuario(string username)
         {
             //Crear ibjeto que almacena la información de los resultados
             Usuario usuario = new Usuario();
