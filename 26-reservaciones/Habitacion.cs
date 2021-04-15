@@ -105,5 +105,44 @@ namespace _26_reservaciones
                 sqlConnection.Close();
             }
         }
+
+        public List<Habitacion> MonstrarHabitaciones()
+        {
+            //Inicializar una lista vacia de habitaciones
+            List<Habitacion> habitaciones = new List<Habitacion>();
+
+            try
+            {
+                //Query de seleccion
+                string query = @"SELECT id, descripcion
+                                FROM habitaciones.habitacion";
+
+                //Establcer la coneccion
+                sqlConnection.Open();
+
+                //Crear el comando sql
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Obtener los datos de las habitaciones
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        habitaciones.Add(new Habitacion { Id = Convert.ToInt32(rdr["id"]), Descripcion = rdr["Descripcion"].ToString() });
+                    }
+                }
+                return habitaciones;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
     }
 }

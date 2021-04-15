@@ -27,7 +27,7 @@
         <PasswordBox Name="pwbPassword" FontSize="15" Grid.Column="1" Grid.Row="2" Margin="0 0 10 0"/>
 
         <Button Name="btnAceptar" Content="Aceptar" FontSize="15" Grid.Row="3" Width="150" Height="80" Click="btnAceptar_Click" />
-        <Button Name="btnCerrar" Content="Cerrar" FontSize="15" Grid.Column="1" Grid.Row="3" Width="150" Height="80" />
+        <Button Name="btnCerrar" Content="Cerrar" FontSize="15" Grid.Column="1" Grid.Row="3" Width="150" Height="80" Click="btnCerrar_Click_1" />
 
     </Grid>
 </Window>
