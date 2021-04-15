@@ -45,7 +45,7 @@ namespace _26_reservaciones
                     if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado)
                     {
                         // Mostrar el formulario de menú principal
-                        MenuPrincipal menu = new MenuPrincipal(elUsuario.NombreCompleto); 
+                        MenuPrincipal menu = new MenuPrincipal(elUsuario.NombreCompleto);
                         menu.Show();
                         Close();
                     }
