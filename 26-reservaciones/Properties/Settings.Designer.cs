@@ -26,8 +26,8 @@ namespace _26_reservaciones.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(local)\\SQLEXPRESS2019;Initial Catalog=Reservaciones;Integrated Secur" +
-            "ity=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(local)\\MSSQLSERVER2019;Initial Catalog=Reservaciones;Integrated Secu" +
+            "rity=True")]
         public string ReservacionesConexion {
             get {
                 return ((string)(this["ReservacionesConexion"]));

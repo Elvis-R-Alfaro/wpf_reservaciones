@@ -10,8 +10,8 @@ namespace _26_reservaciones
 {
     class Usuario
     {
-        private static string sqlConnectionString = ConfigurationManager.ConnectionStrings["_26_reservaciones.Propeerties.Settings.ReservacionesConexion"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(sqlConnectionString);
+        private static string connectionString = ConfigurationManager.ConnectionStrings["_26_reservaciones.Properties.Settings.ReservacionesConexion"].ConnectionString;
+        private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
         public int Id { get; set; }

@@ -20,8 +20,9 @@ namespace _26_reservaciones
     /// </summary>
     public partial class IniciarSesion : Window
     {
-        //Objeti de tipo usuarios para implementar su funcionalidad
+        // Objeto de tipo usuario para implementar su funcionalidad
         private Usuario usuario = new Usuario();
+
         public IniciarSesion()
         {
             InitializeComponent();
@@ -31,31 +32,41 @@ namespace _26_reservaciones
         {
             try
             {
-                //Implementar la busqueda del usuario desde la clase
+                // Implementar la búsqueda del usuario desde la clase Usuario
                 Usuario elUsuario = usuario.BuscarUsuario(txtUsername.Text);
 
-                //Verificar si el usuario existe
-                if (elUsuario.Username == string.Empty)
-                    MessageBox.Show("El usuario no existe en nuestro sistema");
+                // Verificar si el usuario existe
+                if (elUsuario.Username == null)
+                    MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.");
                 else
                 {
-                    //verificar que la contrasela ingresada es igual a la contraseña
-                    //almaceanr en la bas de datos
-                    if(elUsuario.Password == pwbPassword.Password)
+                    // Verificar que la contraseña ingresada es igual a la contraseña
+                    // almacenada en la base de datos
+                    if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado)
                     {
-                        MessageBox.Show("!Bienvenido al sistema de reservaciones¡");
+                        // Mostrar el formulario de menú principal
+                        //MenuPrincipal menu = new MenuPrincipal(elUsuario.NombreCompleto)
+                        MessageBox.Show("Bienvenido"); ;
+                        //menu.Show();
+                        //Close();
                     }
+                    else if (!elUsuario.Estado)
+                        MessageBox.Show("Tu usuario se encuentra innactivo. Favor comunicarte con el personal de IT");
                     else
-                    {
-                        MessageBox.Show("La contraseña no es correcta, Por favor verificala");
-                    }
+                        MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un erroe al momento de realzar la consulta...");
+                //MessageBox.Show("Ha ocurrido un error al momento de realizar la consulta...");
+                MessageBox.Show(ex.Message);
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private void btnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
