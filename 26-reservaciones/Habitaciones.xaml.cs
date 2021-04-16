@@ -191,5 +191,36 @@ namespace _26_reservaciones
             //Cerrar el formulario
             this.Close();
         }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (lbHabitaciones.SelectedValue == null)
+                    MessageBox.Show("Por favor selecciona una habitacion desde el listad");
+                else
+                {
+                    //Monstrar mensjae de confirmacion
+                    MessageBoxResult result = MessageBox.Show("¿Deseas eliminar la habitacion?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        //Eliminar la habitacion
+                        habitacion.EliminarHabitacion(Convert.ToInt32(lbHabitaciones.SelectedValue));
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al eliminar la habitacion...");
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                //Actualizar el listbox de habitaciones
+                ObtenerHabitaciones();
+            }
+        }
     }
 }

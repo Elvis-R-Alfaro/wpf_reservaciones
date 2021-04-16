@@ -35,7 +35,7 @@ namespace _26_reservaciones
         //Constructor
         public Habitacion() { }
 
-        
+
         public Habitacion(string descripcion, int numero, EstadosHabitacion estado)
         {
             Descripcion = descripcion;
@@ -106,6 +106,10 @@ namespace _26_reservaciones
             }
         }
 
+        /// <summary>
+        /// Monstrar todas las habitaciones
+        /// </summary>
+        /// <returns>listado de habitaciones</returns>
         public List<Habitacion> MonstrarHabitaciones()
         {
             //Inicializar una lista vacia de habitaciones
@@ -145,6 +149,11 @@ namespace _26_reservaciones
             }
         }
 
+        /// <summary>
+        /// Obtiene una habitacion
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Habitacion BuscarHabitacionPorId(int id)
         {
             Habitacion laHabitacion = new Habitacion();
@@ -171,7 +180,7 @@ namespace _26_reservaciones
                         laHabitacion.Id = Convert.ToInt32(rdr["id"]);
                         laHabitacion.Descripcion = rdr["descripcion"].ToString();
                         laHabitacion.Numero = Convert.ToInt32(rdr["numero"]);
-                        laHabitacion.Estado = (EstadosHabitacion)Convert.ToChar(rdr["estado"].ToString().Substring(0,1));
+                        laHabitacion.Estado = (EstadosHabitacion)Convert.ToChar(rdr["estado"].ToString().Substring(0, 1));
                     }
                 }
 
@@ -189,6 +198,10 @@ namespace _26_reservaciones
             }
         }
 
+        /// <summary>
+        /// Modifica los datos de una habitacion
+        /// </summary>
+        /// <param name="habitacion">El id de la habitacion</param>
         public void ModificarHabitacion(Habitacion habitacion)
         {
             try
@@ -220,6 +233,42 @@ namespace _26_reservaciones
             finally
             {
                 //Cerrar conexcion
+                sqlConnection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Elimina una habitacion
+        /// </summary>
+        /// <param name="id">El id de la habitacion</param>
+        public void EliminarHabitacion(int id)
+        {
+            try
+            {
+                //Query de eliminar
+                string query = @"DELETE FROM Habitaciones.Habitacion
+                                WHERE id = @id";
+
+                //Establecer la conexion SQL
+                sqlConnection.Open();
+
+                //Establecer el valor del parametro
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer el valor del parametro
+                sqlCommand.Parameters.AddWithValue("@id", id);
+
+                //Ejecutar el comando de eliminacion
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                //CErrar conexion
                 sqlConnection.Close();
             }
         }
