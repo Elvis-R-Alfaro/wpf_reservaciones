@@ -144,5 +144,84 @@ namespace _26_reservaciones
                 sqlConnection.Close();
             }
         }
+
+        public Habitacion BuscarHabitacionPorId(int id)
+        {
+            Habitacion laHabitacion = new Habitacion();
+
+            try
+            {
+                //Query busqueda
+                string query = @"SELECT * From Habitaciones.habitacion
+                                WHERE id = @id";
+
+                //Establecer la coneccion
+                sqlConnection.Open();
+
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer el valor del parametro
+                sqlCommand.Parameters.AddWithValue("@id", id);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        laHabitacion.Id = Convert.ToInt32(rdr["id"]);
+                        laHabitacion.Descripcion = rdr["descripcion"].ToString();
+                        laHabitacion.Numero = Convert.ToInt32(rdr["numero"]);
+                        laHabitacion.Estado = (EstadosHabitacion)Convert.ToChar(rdr["estado"].ToString().Substring(0,1));
+                    }
+                }
+
+                return laHabitacion;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexio
+                sqlConnection.Close();
+            }
+        }
+
+        public void ModificarHabitacion(Habitacion habitacion)
+        {
+            try
+            {
+                //Query de actualizacion
+                string query = @"UPDATE Habitaciones.Habitacion
+                                SET descripcion = @descripcion, numero = @numero, estado = @estado
+                                WHERE id = @id";
+
+                //Strablecer la conexion
+                sqlConnection.Open();
+
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer los valores de los parametros
+                sqlCommand.Parameters.AddWithValue("@id", habitacion.Id);
+                sqlCommand.Parameters.AddWithValue("@descripcion", habitacion.Descripcion);
+                sqlCommand.Parameters.AddWithValue("@numero", habitacion.Numero);
+                sqlCommand.Parameters.AddWithValue("@estado", ObtenerEstado(habitacion.Estado));
+
+                //Ejecutar el comando de actualizar
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                //Cerrar conexcion
+                sqlConnection.Close();
+            }
+        }
     }
 }
